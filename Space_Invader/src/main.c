@@ -66,18 +66,14 @@ int main(void)
   */
 
   /* TODO - Add your application code here */
-menu();
-vt100_clear_screen();
+  while (1) {
+	  if (mode == 0){
+		  menu();
+	  }
+	  mode = jeu();
 
-jeu();
+  }
 
-vt100_clear_screen();
-if (jeu() == 1){
-	jeu();
-}
-if (jeu() == 2){
-	menu();
-}
 
 
 

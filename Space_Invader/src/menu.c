@@ -13,15 +13,15 @@
 void menu(){
 	float c;
 	uint16_t clavier1 = 0;
-
+	vt100_clear_screen();
 	while (clavier1 != 0x70){
 		clavier1 = serial_get_last_char();
 		vt100_move(33, 5);
 		serial_puts("---SPACE INVADER---");
 		vt100_move(31, 10);
 		serial_puts("°-- PRESS P TO START --°");
-		vt100_move(25, 16);
-		serial_puts(" \\''0''// --------> DESTROY INVADER");
+		vt100_move(33, 16);
+		serial_puts("  V   -------> INVADER");
 		vt100_move(33, 13);
 		serial_puts("¡_|_¡ -------> YOU");
 
@@ -33,8 +33,8 @@ void menu(){
 		vt100_move(33, 5);
 		serial_puts("---SPACE INVADER---");
 
-		vt100_move(25, 16);
-		serial_puts(" \\''0''// --------> DESTROY INVADER");
+		vt100_move(33, 16);
+		serial_puts("  V   -------> INVADER");
 		vt100_move(33, 13);
 		serial_puts("¡_|_¡ -------> YOU");
 

@@ -8,29 +8,34 @@
 #include "serial.h"
 #include <vt100.h>
 #include "jeu.h"
+#include "time.h"
+#include "option_display.h"
 
-void jeu(){
+uint8_t jeu(void){
 
-	uint8_t tab_invader[10]= "\\''0''//";
-	uint8_t i = 40;
-	uint8_t pmx = 0;
-	uint8_t pmy = 23;
-	uint8_t pix = 0;
-	uint8_t piy = 0;
-	float c;
-	uint16_t ci = 0;
-	uint8_t cib = 0;
-	int exit = 0;
-	uint16_t clavier2 = 0;
+	//char tab_invader[2]= "v";
+	uint8_t i = 40;  // position de départ du joueur
+	uint8_t pmx = 0; // déclaration de la variable pour la coordonée x du missile
+	uint8_t pmy = 23; // déclaration de la variable pour la coordonée y du missile
+	uint8_t pix = 5; // déclaration de la position de départ des ennemis en x
+	uint8_t piy = 3; // en y
+
+	uint16_t ci = 0; // conteur pour temperer les déplacements des enemis
+
+	uint16_t clavier2 = 0; // variable contenant la valeur de la touche clavier appuyé
+
+	vt100_clear_screen();
 
 
 	while(clavier2 != 0x6D && clavier2 != 0x1B){
 
 					clavier2 = serial_get_last_char();
-		 	 	 	vt100_move(i, 24);
-					serial_puts("¡_|_¡");
-					vt100_move(pix,piy);
-					serial_puts(tab_invader);
+					vt100_move(0,2);
+
+					//début du jeu
+					serial_puts("-----------------------------------------------------------");
+		 	 	 	player(i);
+					invader(pix,piy,0,0);
 
 
 					//position invader
@@ -40,53 +45,42 @@ void jeu(){
 					if (clavier2 == 0x71) {
 						i -= 1;
 						vt100_clear_screen();
-						vt100_move(i, 24);
-						serial_puts("¡_|_¡");
+						player(i);
 
 					}
 					//mouvement vers la gauche
 					if (clavier2 == 0x64) {
 						i += 1;
 						vt100_clear_screen();
-						vt100_move(i, 24);
-						serial_puts("¡_|_¡");
+						player(i);
 					}
 
 
 					// commande de tir
 					if (clavier2 == 0x66) {
 						pmy = 23;
-						while (pmy != 0) {
+						while (pmy != 3) {
 							pmx = i + 2;
 							pmy -= 1;
 							vt100_clear_screen();
 
 							// on garde l'affichage des vaisseaux pendant le tir
-							vt100_move(i, 24);
-							serial_puts("¡_|_¡");
-							vt100_move(pix,piy);
-							serial_puts(tab_invader);
+							player(i);
+							invader(pix,piy,0,0);
 
 							//bloc de commande du tir
 							vt100_move(pmx, pmy);
 							serial_putchar('^');
-							if (pmy == piy && pmx == pix+4){
-								while (cib < 10){
-								tab_invader[cib] = ' ';
-								cib++;
-								}
-								break;
-							}
+							invader(pix,piy,pmx,pmy);
 
-							for(c=0;c<200000;c++);
+							time(200000);
 
 							//destruction invader
 						}
 						vt100_clear_screen();
 					}
 					else {
-						vt100_move(i, 24);
-						serial_puts("¡_|_¡");
+						player(i);
 						ci++;
 						if (ci == 50){
 							pix++;
@@ -99,8 +93,7 @@ void jeu(){
 						}
 
 
-						vt100_move(pix,piy);
-						serial_puts(tab_invader);
+						invader(pix,piy,0,0);
 
 					}
 
@@ -108,13 +101,12 @@ void jeu(){
 
 	if (clavier2 == 0x6D){
 		//exit = 1;
+		vt100_clear_screen();
 		return 1;
+		//menu();
 	}
-	if (clavier2 == 0x1B){
-		//exit = 2;
-		return 2;
-	}
-	//return exit;
-};
+
+	return 0;
+}
 
 

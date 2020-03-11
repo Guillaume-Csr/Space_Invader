@@ -8,6 +8,6 @@
 #ifndef JEU_H_
 #define JEU_H_
 
-
+	uint8_t jeu(void);
 
 #endif /* JEU_H_ */
