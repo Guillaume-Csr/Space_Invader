@@ -21,7 +21,7 @@
 
 * **Atolic TRUESTUDIO :**
 
-Au sein du logiciel ATOLIC TRUESTUDIO, il suffit **d'ajouter** le fichier du projet de lancer le build en utilisant **CTRL + B** et de debugger le programme en appuyant sur **F5**.
+Au sein du logiciel ATOLIC TRUESTUDIO, il suffit **d'ajouter** le fichier projet, de lancer le build en utilisant **CTRL + B** et de debugger le programme en appuyant sur **F11**.
 
 Il ne reste plus qu'a lancer l'execution du programme avec le bouton **"play"** vert.
 
