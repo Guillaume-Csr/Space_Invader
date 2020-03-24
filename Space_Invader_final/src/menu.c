@@ -7,11 +7,11 @@
 #include "serial.h"
 #include <vt100.h>
 #include "menu.h"
-
+#include "time.h"
 
 
 void menu(){
-	float c;
+	//float c;
 	uint16_t clavier1 = 0;
 	vt100_clear_screen();
 	while (clavier1 != 0x70){
@@ -27,7 +27,8 @@ void menu(){
 
 		vt100_move(0, 40);
 		serial_puts("gameghost_copyright");
-		for (c = 0; c < 3000000; c++);
+		//for (c = 0; c < 3000000; c++);
+		time(3000000);
 
 		vt100_clear_screen();
 		vt100_move(33, 5);
@@ -40,6 +41,7 @@ void menu(){
 
 		vt100_move(0, 40);
 		serial_puts("gameghost_copyright");
-		for (c = 0; c < 3000000; c++);
+		//for (c = 0; c < 3000000; c++);
+		time(3000000);
 	}
 };

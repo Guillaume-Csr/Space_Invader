@@ -50,8 +50,8 @@ SOFTWARE.
 int main(void)
 {
   int i = 0;
-  uint8_t mode = 0;
-  serial_init(115200);
+  uint8_t mode = 0; // variable permettant selon la valeur retourner par jeu() de relancer le jeu ou d'aller au menu d'accueil
+  serial_init(115200); // vitesse de communication initialiser à 115200
   vt100_clear_screen();
   vt100_move(0, 0);
 

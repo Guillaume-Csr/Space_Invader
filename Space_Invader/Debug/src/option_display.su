@@ -1,4 +1,0 @@
-option_display.c:24:6:vie	16	static
-option_display.c:42:6:game_over	16	static
-option_display.c:57:6:player	16	static
-option_display.c:62:6:invader	48	static

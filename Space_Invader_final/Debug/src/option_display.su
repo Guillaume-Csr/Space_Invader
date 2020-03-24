@@ -1,0 +1,5 @@
+option_display.c:38:6:vie	16	static
+option_display.c:77:9:player	16	static
+option_display.c:112:9:invader	56	static
+option_display.c:259:6:game_over	8	static
+option_display.c:295:6:win	8	static
